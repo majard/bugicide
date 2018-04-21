@@ -9,11 +9,11 @@ Rails version: 5.0.2
 The dependencies for this project are documented on the Gemfile, and installed with Bundler.
 To install bundler run:
 
-$ gem install bundler
+'$ gem install bundler'
 
 And then, to install the dependencies run:
 
-$ bundler install 
+'$ bundler install ''
 
 in the project folder.
 
