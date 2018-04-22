@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
+# Version of ruby used in development
 ruby '2.4.1'
+# For managing user authentication 
+gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.2'
 # Use Puma as the app server
