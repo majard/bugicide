@@ -29,7 +29,12 @@ class BugsController < ApplicationController
     respond_to do |format|
       if @bug.save
         format.html { redirect_to @bug, notice: 'Bug was successfully created.' }
-        format.json { render :show, status: :created, location: @bug }
+        format.json 
+        link_to_bug = request.host +
+          Rails.application.routes.url_helpers.bugs_path + "/#{@bug.id}"
+        link_to_project = request.host + 
+          Rails.application.routes.url_helpers.projects_path + "/#{@bug.project_id}"
+        SlackNotifier.ping "New <#{link_to_bug}|Bug> at Project <#{link_to_project}|#{@bug.project.name}>!"
       else
         format.html { render :new }
         format.json { render json: @bug.errors, status: :unprocessable_entity }
@@ -44,6 +49,13 @@ class BugsController < ApplicationController
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
         format.json { render :show, status: :ok, location: @bug }
+        if @bug.solved
+          link_to_bug = request.host +
+            Rails.application.routes.url_helpers.bugs_path + "/#{@bug.id}"
+          link_to_project = request.host + 
+            Rails.application.routes.url_helpers.projects_path + "/#{@bug.project_id}"
+          SlackNotifier.ping "<#{link_to_bug}|Bug> solved at Project <#{link_to_project}|#{@bug.project.name}>!"
+        end
       else
         format.html { render :edit }
         format.json { render json: @bug.errors, status: :unprocessable_entity }

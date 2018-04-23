@@ -2,10 +2,12 @@ source 'https://rubygems.org'
 
 # Version of ruby used in development
 ruby '2.4.1'
-# For managing user authentication 
-gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.2'
+# For managing user authentication 
+gem 'devise'
+# For managing slack notification
+gem "slack-notifier"
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use bootstrap for frontend
