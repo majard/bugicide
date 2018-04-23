@@ -59,9 +59,9 @@ class BugsController < ApplicationController
           link_to_project = request.host + 
             Rails.application.routes.url_helpers.projects_path +
             "/#{@bug.project_id}"
-          message = "<#{link_to_bug}|Bug> solved at Project" +
+          message = "<#{link_to_bug}|Bug> solved at Project " +
             "<#{link_to_project}|#{@bug.project.name}>!" +
-            "Bug details: \n" + @bug.to_s
+            "\nBug details: \n" + @bug.to_s
           SlackNotifier.ping message
         end
       else
