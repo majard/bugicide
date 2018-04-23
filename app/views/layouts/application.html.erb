@@ -16,13 +16,13 @@
     <p class="alert"><%= alert %></p>
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
+        <%= link_to "Bugicide", root_path, id: "logo" %>
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Home",  root_path  %></li>
             <% if user_signed_in? %>
               <li>
-                Signed in as... <%= link_to current_user.email, 
-                  edit_user_registration_path %>
+                <%= link_to current_user.email, edit_user_registration_path %>
               </li>
               <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
             <% else %>
