@@ -33,8 +33,12 @@ class BugsController < ApplicationController
         link_to_bug = request.host +
           Rails.application.routes.url_helpers.bugs_path + "/#{@bug.id}"
         link_to_project = request.host + 
-          Rails.application.routes.url_helpers.projects_path + "/#{@bug.project_id}"
-        SlackNotifier.ping "New <#{link_to_bug}|Bug> at Project <#{link_to_project}|#{@bug.project.name}>!"
+          Rails.application.routes.url_helpers.projects_path + 
+          "/#{@bug.project_id}"
+        message = "New <#{link_to_bug}|Bug> at Project " +
+          "<#{link_to_project}|#{@bug.project.name}>!\n" +
+          "Bug details: \n" + @bug.to_s
+        SlackNotifier.ping message
       else
         format.html { render :new }
         format.json { render json: @bug.errors, status: :unprocessable_entity }
@@ -53,8 +57,12 @@ class BugsController < ApplicationController
           link_to_bug = request.host +
             Rails.application.routes.url_helpers.bugs_path + "/#{@bug.id}"
           link_to_project = request.host + 
-            Rails.application.routes.url_helpers.projects_path + "/#{@bug.project_id}"
-          SlackNotifier.ping "<#{link_to_bug}|Bug> solved at Project <#{link_to_project}|#{@bug.project.name}>!"
+            Rails.application.routes.url_helpers.projects_path +
+            "/#{@bug.project_id}"
+          message = "<#{link_to_bug}|Bug> solved at Project" +
+            "<#{link_to_project}|#{@bug.project.name}>!" +
+            "Bug details: \n" + @bug.to_s
+          SlackNotifier.ping message
         end
       else
         format.html { render :edit }
