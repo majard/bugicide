@@ -8,6 +8,7 @@
       <th>Name</th>
       <th>Description</th>
       <th>Solved</th>
+      <th>Project</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
         <td><%= bug.name %></td>
         <td><%= bug.description %></td>
         <td><%= bug.solved %></td>
+        <td><%= bug.project %></td>
         <td><%= link_to 'Show', bug %></td>
         <td><%= link_to 'Edit', edit_bug_path(bug) %></td>
         <td><%= link_to 'Destroy', bug, method: :delete, data: { confirm: 'Are you sure?' } %></td>
